@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lanezy | AI/NLP SIF Precursor Detection (SIH26165)</title>
+<meta name="description" content="Lanezy: prototype AI/NLP safety intelligence for detecting SIF precursors in free-text safety reports.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap bar-in">
+  <a class="brand" href="#home"><span class="logo">L</span><span data-cfg="name">Lanezy</span></a>
+  <button id="menuBtn" class="menu" aria-label="Menu" aria-expanded="false" aria-controls="nav">☰</button>
+  <nav id="nav" aria-label="Main"><a href="#problem">Problem</a><a href="#solution">Solution</a><a href="#workflow">How it works</a><a href="#prototype">Live prototype</a><a href="#dashboard">Dashboard</a><a href="#architecture">Architecture</a><a href="#impact">Impact</a><a href="#tech">Technology</a></nav>
+</div></header>
+
+<main id="main">
+<section id="home" class="hero"><div class="wrap grid2">
+  <div class="reveal">
+    <p class="eyebrow">SIH 2026 · <span data-cfg="psId"></span> · Smart Automation · Prototype</p>
+    <h1>Turn free-text safety reports into <em>early SIF warnings</em>.</h1>
+    <p class="lead" data-cfg="tagline"></p>
+    <div class="cta"><a class="btn" href="#prototype">Try the live prototype</a><a class="btn ghost" href="#workflow">See how it works</a></div>
+    <p class="note">Prototype with simulated analysis and sample data. Not connected to real OIL data. AI output supports, never replaces, HSE review.</p>
+  </div>
+  <div class="hero-card reveal" aria-hidden="true">
+    <div class="mini-head"><span class="badge bad">SIF-potential</span><span class="badge risk-High">High priority</span></div>
+    <p class="mini-text">“…pump started while the motor breaker was <mark>not isolated</mark> and no <mark>lockout</mark> applied…”</p>
+    <div class="tags"><span class="tag">Energy Isolation</span><span class="tag w">not isolated</span></div>
+    <div class="conf"><span>Confidence</span><div class="bar"><i style="width:88%"></i></div><b>88%</b></div>
+    <small class="muted">Illustrative example</small>
+  </div>
+</div></section>
+
+<section id="problem" class="sec"><div class="wrap">
+  <h2>The problem</h2>
+  <p class="sub">OIL logs a large number of Unsafe-Act/Unsafe-Condition (UA/UC), near-miss and incident reports. Most analysis is manual and done in periodic batches.</p>
+  <div class="cards c3 reveal">
+    <article class="card"><h3>Buried precursors</h3><p>A routine-looking free-text report can hide a SIF precursor that goes unnoticed for a long time.</p></article>
+    <article class="card"><h3>Severity ≠ root cause</h3><p>A low-severity incident does not necessarily share root causes with a fatality, yet it may still carry fatal potential.</p></article>
+    <article class="card"><h3>Patterns stay hidden</h3><p>Recurring combinations of activity, location and barrier failure are easy to miss when reports are reviewed one by one.</p></article>
+  </div>
+</div></section>
+
+<section id="solution" class="sec alt"><div class="wrap">
+  <h2>Our solution: Lanezy</h2>
+  <p class="sub">An AI/NLP safety intelligence system that reads reports, flags possible SIF precursors, maps Life-Saving Rules and surfaces high-risk patterns.</p>
+  <div class="cards c4 reveal">
+    <article class="card"><span class="ico">1</span><h3>AI/NLP Classification</h3><p>SIF-potential vs non-SIF-potential from report text.</p></article>
+    <article class="card"><span class="ico">2</span><h3>Life-Saving Rule Mapping</h3><p>Energy Isolation, Hot Work, Confined Space, Line of Fire and more, multi-label.</p></article>
+    <article class="card"><span class="ico">3</span><h3>Pattern Discovery</h3><p>Recurring activity, location and barrier-failure combinations.</p></article>
+    <article class="card"><span class="ico">4</span><h3>Risk Prioritisation</h3><p>Sites and activities ranked by SIF-precursor density.</p></article>
+  </div>
+</div></section>
+
+<section id="workflow" class="sec"><div class="wrap">
+  <h2>How it works</h2><p class="sub">Seven-step safety report intelligence workflow, ending in human review.</p>
+  <ol class="flow reveal">
+    <li><b>Safety report</b><span>Raw UA/UC &amp; near-miss text</span></li><li><b>NLP preprocessing</b><span>Clean &amp; normalise text</span></li><li><b>SIF classification</b><span>SIF-potential or not</span></li><li><b>Rule mapping</b><span>Life-Saving Rule tags</span></li><li><b>Pattern detection</b><span>Activity/location/barrier trends</span></li><li><b>Risk prioritisation</b><span>Precursor-density ranking</span></li><li><b>HSE dashboard</b><span>Review &amp; intervene</span></li>
+  </ol>
+</div></section>
+
+<section id="prototype" class="sec alt"><div class="wrap">
+  <h2>Live prototype: analyse a report</h2>
+  <p class="sub">Paste a report or load a sample. This is an <b>AI analysis simulation</b> using a keyword and rule dictionary in the browser; a trained model would replace it.</p>
+  <div class="grid2 proto">
+    <div class="panel">
+      <label for="reportText">Safety report (free text)</label>
+      <div id="samples" class="chips" aria-label="Sample reports"></div>
+      <textarea id="reportText" rows="9" placeholder="Describe the unsafe act, unsafe condition or near miss…"></textarea>
+      <p id="err" class="err" role="alert"></p>
+      <div class="cta"><button id="analyzeBtn" class="btn">Run analysis</button><button id="clearBtn" class="btn ghost">Clear</button></div>
+    </div>
+    <div class="panel" id="result" aria-live="polite"></div>
+  </div>
+</div></section>
+
+<section id="dashboard" class="sec"><div class="wrap">
+  <h2>HSE dashboard</h2><p class="sub">Sample data (10 simulated reports). Filter to see precursor density, rule distribution and repeated patterns.</p>
+  <div class="filters"><input id="fQ" type="search" placeholder="Search reports…" aria-label="Search reports"><select id="fSite" aria-label="Filter by site"><option value="">All sites</option></select><select id="fRisk" aria-label="Filter by risk"><option value="">All risk levels</option><option>High</option><option>Medium</option><option>Low</option></select></div>
+  <div class="cards c4 kpis">
+    <div class="card"><small>Reports</small><b id="kTotal">0</b></div><div class="card"><small>SIF-potential</small><b id="kSif">0</b></div><div class="card"><small>High priority</small><b id="kHigh">0</b></div><div class="card"><small>SIF share</small><b id="kRate">0%</b></div>
+  </div>
+  <div class="cards c3">
+    <div class="card"><h3>SIF precursors by site</h3><div id="chartSite" class="chart"></div></div>
+    <div class="card"><h3>By Life-Saving Rule</h3><div id="chartRule" class="chart"></div></div>
+    <div class="card"><h3>Recurring patterns</h3><ul id="patterns" class="sim"></ul></div>
+  </div>
+  <div class="table-wrap"><table><caption class="sr">Sample report list</caption><thead><tr><th>ID</th><th>Date</th><th>Site</th><th>Activity</th><th>Rule</th><th>Class</th><th>Priority</th></tr></thead><tbody id="tbody"></tbody></table></div>
+</div></section>
+
+<section id="architecture" class="sec alt"><div class="wrap">
+  <h2>System architecture</h2><p class="sub">Layers from the proposed technical approach.</p>
+  <ol class="flow arch reveal">
+    <li><b>Input &amp; data</b><span>OIL UA/UC, near-miss &amp; incident reports</span></li><li><b>NLP processing</b><span>Python, preprocessing, embeddings/features</span></li><li><b>SIF classifier</b><span>Supervised NLP/ML model</span></li><li><b>Rule mapping</b><span>Multi-label / semantic matching</span></li><li><b>Pattern analysis</b><span>Clustering, frequency &amp; association</span></li><li><b>Dashboard</b><span>Web dashboard, charts &amp; tables</span></li><li><b>HSE review</b><span>Human-in-the-loop decision</span></li>
+  </ol>
+</div></section>
+
+<section id="impact" class="sec"><div class="wrap">
+  <h2>Impact &amp; benefits</h2>
+  <div class="cards c3 reveal">
+    <article class="card"><h3>Safety</h3><p>Surface SIF precursors before they escalate into high-consequence events.</p></article>
+    <article class="card"><h3>Faster HSE review</h3><p>Less manual scanning of large volumes of free-text reports.</p></article>
+    <article class="card"><h3>Better prioritisation</h3><p>Rank sites and activities by precursor density and recurring patterns.</p></article>
+    <article class="card"><h3>Standardised analysis</h3><p>Automatic mapping to IOGP Life-Saving Rules.</p></article>
+    <article class="card"><h3>Pattern visibility</h3><p>Connect repeated activity, location and barrier-failure signals.</p></article>
+    <article class="card"><h3>Continuous improvement</h3><p>Reviewed outcomes feed back into labels, rules and model performance.</p></article>
+  </div>
+</div></section>
+
+<section id="tech" class="sec alt"><div class="wrap">
+  <h2>Technology, risks &amp; safeguards</h2>
+  <div class="cards c3 reveal">
+    <article class="card"><h3>Planned stack</h3><p>Python · NLP/ML · supervised classifier · multi-label / semantic matching · clustering · web dashboard. This prototype: HTML, CSS, vanilla JS.</p></article>
+    <article class="card"><h3>Safety-first design</h3><p>Tuned for safety-sensitive recall, uncertain cases reviewed, no fully automated final decisions.</p></article>
+    <article class="card"><h3>Explainable &amp; controlled</h3><p>Shows important terms, matched rules, confidence and similar reports. Controlled/on-premise deployment preferred.</p></article>
+  </div>
+  <p class="note">References: OIL UA/UC &amp; near-miss reports · IOGP Life-Saving Rules · DEKRA Martin &amp; Black (2015) · EEI SIF Precursor model · VelocityEHS (2024) PSIF classifier.</p>
+</div></section>
+</main>
+<footer><div class="wrap"><b>Lanezy</b> · Team <span data-cfg="team"></span> · <span data-cfg="psId"></span> · Prototype with simulated data</div></footer>
+<script src="data/mock-data.js"></script><script src="js/script.js"></script>
+</body></html>
